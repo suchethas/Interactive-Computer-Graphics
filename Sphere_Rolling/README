@@ -1,5 +1,5 @@
-This assignment is to implement a simple animation by rolling a sphere which is modeled by a
-wireframe representation, with some user-interface capabilities. You will practice transformations
+To implement a simple animation by rolling a sphere which is modeled by a
+wirtoeframe representation, with some user-interface capabilities. You will practice transformations
 and viewings, as well as programming with shader-based OpenGL using vertex buffer objects.  
 
 http://cse.poly.edu/cs653/assg2/
