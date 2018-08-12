@@ -92,9 +92,9 @@ void main()
    {color_add_spot=vec4(0,0,0,1);}
 	
 
-	//if (directional_flag==1.0)
-	//{color = init_color+global_ambient;}
-	if (spot_flag == 1.0 )
+	if (directional_flag==1.0)
+	{color = init_color+global_ambient;}
+	else if (spot_flag == 1.0 )
 	{color = init_color+global_ambient+color_add_spot;}
 	else    
 	{color=init_color+global_ambient+color_add_point;}

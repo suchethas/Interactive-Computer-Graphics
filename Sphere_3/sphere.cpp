@@ -109,7 +109,7 @@ int lighting = 0;
 int flatshade=0;
 int smoothshade=0;
 int spotlight=0;
-int pointsource=1;
+int pointsource=0;
 void my_quad( int a, int b, int c, int d )
 {
 	// Initialize temporary vectors along the quad's edges to
@@ -179,9 +179,9 @@ void set_directional_light(mat4 mv)
 		  1, specular_product );
 	glUniform4fv( glGetUniformLocation(program_2, "global_ambient"),
                   1, global_a*material_ambient );
-	glUniform1f(glGetUniformLocation(program, "point_flag"), 0.0);
-	glUniform1f(glGetUniformLocation(program, "spot_flag"), 0.0);
-	glUniform1f(glGetUniformLocation(program, "directional_flag"), 1.0);
+	glUniform1f(glGetUniformLocation(program_2, "point_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 1.0);
 }
 void set_directional_light_floor(mat4 mv)
 {       
@@ -204,9 +204,9 @@ void set_directional_light_floor(mat4 mv)
                   1, specular_product );
         glUniform4fv( glGetUniformLocation(program_2, "global_ambient"),
                   1, global_a*material_ambient );
-	glUniform1f(glGetUniformLocation(program, "point_flag"), 0.0);
-	glUniform1f(glGetUniformLocation(program, "spot_flag"), 0.0);
-	glUniform1f(glGetUniformLocation(program, "directional_flag"), 1.0);
+	glUniform1f(glGetUniformLocation(program_2, "point_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 1.0);
 }
 void set_point_light(mat4 mv)
 {
@@ -244,9 +244,9 @@ void set_point_light(mat4 mv)
                         quad_att);
         glUniform1f(glGetUniformLocation(program_2, "Shininess"),
                         material_shininess );
-	glUniform1f(glGetUniformLocation(program, "directional_flag"), 0.0);
-	glUniform1f(glGetUniformLocation(program, "point_flag"),1.0);
-	glUniform1f(glGetUniformLocation(program, "spot_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "point_flag"),1.0);
+	glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 0.0);
 }
 void set_point_light_floor(mat4 mv)
 {
@@ -284,9 +284,9 @@ void set_point_light_floor(mat4 mv)
                         quad_att);
         glUniform1f(glGetUniformLocation(program_2, "Shininess"),
                         material_shininess );
-	glUniform1f(glGetUniformLocation(program, "directional_flag"), 0.0);
-        glUniform1f(glGetUniformLocation(program, "point_flag"), 1.0);
-        glUniform1f(glGetUniformLocation(program, "spot_flag"), 0.0);
+	glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 0.0);
+        glUniform1f(glGetUniformLocation(program_2, "point_flag"), 1.0);
+        glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 0.0);
 }
 
 void set_spot_light(mat4 mv)
@@ -310,14 +310,14 @@ void set_spot_light(mat4 mv)
         color4 material_specular( 1.0, 0.84, 0, 1 );
         float  material_shininess = 125;
 
-	glUniform4fv( glGetUniformLocation(program, "LightPosition"),
+	glUniform4fv( glGetUniformLocation(program_2, "LightPosition"),
    		  1, light_position_eyeFrame);
 
-    	glUniform1f(glGetUniformLocation(program, "ConstAtt"),
+    	glUniform1f(glGetUniformLocation(program_2, "ConstAtt"),
 		        const_att);
-    	glUniform1f(glGetUniformLocation(program, "LinearAtt"),
+    	glUniform1f(glGetUniformLocation(program_2, "LinearAtt"),
 		        linear_att);
-    	glUniform1f(glGetUniformLocation(program, "QuadAtt"),
+    	glUniform1f(glGetUniformLocation(program_2, "QuadAtt"),
 		        quad_att);
         color4 ambient_product = light_ambient * material_ambient;
         color4 diffuse_product = light_diffuse * material_diffuse;
@@ -333,11 +333,11 @@ void set_spot_light(mat4 mv)
 	point4 spot_direction=mv*vec4(-6.0,0.0,-4.5,1.0);
 	glUniform4fv(glGetUniformLocation(program, "spot_direction"),1,
 		        spot_direction);
-	glUniform1f(glGetUniformLocation(program, "directional_flag"), 0.0);
-        glUniform1f(glGetUniformLocation(program, "point_flag"), 0.0);
-        glUniform1f(glGetUniformLocation(program, "spot_flag"), 1.0);
-	glUniform1f(glGetUniformLocation(program, "spot_exp"), spot_exp);
-	glUniform1f(glGetUniformLocation(program, "spot_ang"), spot_ang);
+	glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 0.0);
+        glUniform1f(glGetUniformLocation(program_2, "point_flag"), 0.0);
+        glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 1.0);
+	glUniform1f(glGetUniformLocation(program_2, "spot_exp"), spot_exp);
+	glUniform1f(glGetUniformLocation(program_2, "spot_ang"), spot_ang);
 
 }
 void set_spot_light_floor(mat4 mv)
@@ -360,14 +360,14 @@ void set_spot_light_floor(mat4 mv)
 	color4 material_ambient( 0.2,0.2, 0.2, 1.0 );
         color4 material_diffuse( 0, 1.0, 0, 1 );
         color4 material_specular( 0, 0, 0, 1 );
-        glUniform4fv( glGetUniformLocation(program, "LightPosition"),
+        glUniform4fv( glGetUniformLocation(program_2, "LightPosition"),
                   1, light_position_eyeFrame);
 
-        glUniform1f(glGetUniformLocation(program, "ConstAtt"),
+        glUniform1f(glGetUniformLocation(program_2, "ConstAtt"),
                         const_att);
-        glUniform1f(glGetUniformLocation(program, "LinearAtt"),
+        glUniform1f(glGetUniformLocation(program_2, "LinearAtt"),
                         linear_att);
-        glUniform1f(glGetUniformLocation(program, "QuadAtt"),
+        glUniform1f(glGetUniformLocation(program_2, "QuadAtt"),
                         quad_att);
         color4 ambient_product = light_ambient * material_ambient;
         color4 diffuse_product = light_diffuse * material_diffuse;
@@ -381,13 +381,13 @@ void set_spot_light_floor(mat4 mv)
         glUniform4fv( glGetUniformLocation(program_2, "global_ambient"),
                   1, global_a*material_ambient );
         point4 spot_direction=mv*vec4(-6.0,0.0,-4.5,1.0);
-        glUniform4fv(glGetUniformLocation(program, "spot_direction"),1,
+        glUniform4fv(glGetUniformLocation(program_2, "spot_direction"),1,
                         spot_direction);
-        glUniform1f(glGetUniformLocation(program, "directional_flag"), 0.0);
-        glUniform1f(glGetUniformLocation(program, "point_flag"), 0.0);
-        glUniform1f(glGetUniformLocation(program, "spot_flag"), 1.0);
-        glUniform1f(glGetUniformLocation(program, "spot_exp"), spot_exp);
-        glUniform1f(glGetUniformLocation(program, "spot_ang"), spot_ang);
+        glUniform1f(glGetUniformLocation(program_2, "directional_flag"), 0.0);
+        glUniform1f(glGetUniformLocation(program_2, "point_flag"), 0.0);
+        glUniform1f(glGetUniformLocation(program_2, "spot_flag"), 1.0);
+        glUniform1f(glGetUniformLocation(program_2, "spot_exp"), spot_exp);
+        glUniform1f(glGetUniformLocation(program_2, "spot_ang"), spot_ang);
 
 }
 
@@ -582,14 +582,14 @@ void display( void )
             {
                 set_point_light(mv);
             }
-            else
+            else if(spotlight)
             {
                 set_spot_light(mv);
             }
-	    //else
-	//{
-	 //set_directional_light(mv);
-	//}
+	    else
+	{
+	 set_directional_light(mv);
+	}
             glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv1); // GL_TRUE: matrix is row-major
             mat3 normal_matrix = NormalMatrix(mv1, 1);
             glUniformMatrix3fv(glGetUniformLocation(program_2, "Normal_Matrix"),
@@ -608,14 +608,14 @@ void display( void )
             {
                 set_point_light(mv);
             }
-            else
+            else if(spotlight)
             {
                 set_spot_light(mv);
             }
-            //else
-        //{
-         //set_directional_light(mv);
-        //}
+            else
+        {
+         set_directional_light(mv);
+        }
             glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv1); // GL_TRUE: matrix is row-major
             mat3 normal_matrix = NormalMatrix(mv1, 1);
             glUniformMatrix3fv(glGetUniformLocation(program_2, "Normal_Matrix"),
@@ -703,14 +703,14 @@ else
         {
             set_point_light_floor(mv);
         }
-else
+else if(spotlight)
             {
                 set_spot_light_floor(mv);
             }
-            //else
-       // {
-         //set_directional_light_floor(mv);
-        //}        
+            else
+        {
+         set_directional_light_floor(mv);
+        }        
 glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv );
         mat3 normal_matrix = NormalMatrix(mv, 1);
         glUniformMatrix3fv(glGetUniformLocation(program_2, "Normal_Matrix"),
@@ -743,14 +743,14 @@ glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv );
         {
             set_point_light_floor(mv);
         }
-else
+else if(spotlight)
             {
                 set_spot_light_floor(mv);
             }
-            //else
-        //{
-         //set_directional_light_floor(mv);
-        //}        
+            else
+        {
+         set_directional_light_floor(mv);
+        }        
 glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv );
          normal_matrix = NormalMatrix(mv, 1);
         glUniformMatrix3fv(glGetUniformLocation(program_2, "Normal_Matrix"),
@@ -772,14 +772,14 @@ glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv );
     {
         set_point_light_floor(mv);
     }
-else
+else if(spotlight)
             {
                 set_spot_light_floor(mv);
             }
-    //        else
-      //  {
-        // set_directional_light_floor(mv);
-        //}    
+           else
+        {
+         set_directional_light_floor(mv);
+        }    
 glUniformMatrix4fv(ModelView, 1, GL_TRUE, mv );
     mat3 normal_matrix = NormalMatrix(mv, 1);
     glUniformMatrix3fv(glGetUniformLocation(program_2, "Normal_Matrix"),
